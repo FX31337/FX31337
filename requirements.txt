@@ -1,0 +1,9 @@
+IBMQuantumExperience==1.8.29
+dateparser==0.7.0
+docker==3.3.0
+gdax==1.0.6
+matplotlib==2.1.2
+numpy==1.14.2
+python-binance==0.6.9
+redis==2.10.6
+tornado==5.0.2

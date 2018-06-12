@@ -1,0 +1,2 @@
+class MarketHandler():
+    pass

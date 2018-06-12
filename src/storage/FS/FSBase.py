@@ -1,0 +1,2 @@
+class FSBase():
+    pass

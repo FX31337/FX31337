@@ -1,0 +1,5 @@
+# Ignore Python caches.
+__pycache__
+
+# Ignore macOS Desktop Services Store files.
+.DS_Store
