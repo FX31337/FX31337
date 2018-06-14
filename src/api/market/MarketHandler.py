@@ -2,7 +2,7 @@ from .Market import Market
 from .Timeframe import Timeframe
 from src.handlers.web.WebHandler import WebHandler
 
-class MarketHandler(WebHandler.handler):
+class MarketHandler(WebHandler.request):
 
     def get(self):
         data = {}

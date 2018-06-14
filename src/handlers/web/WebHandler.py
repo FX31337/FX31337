@@ -1,14 +1,14 @@
 from .TornadoApp import TornadoApp
 from .TornadoHandler import TornadoHandler
 
-class WebHandler():
+"""
+" Defines a web handler.
+"""
+class WebHandler(TornadoApp):
     handlers = None
-    port = None
 
     # Define web engine.
-    handler = TornadoHandler
-    app = TornadoApp
+    request = TornadoHandler
 
-    def __init__(self, handlers, port):
-        self.handlers, self.port = handlers, port
-        self.app = self.app(handlers)
+    def __init__(self, handlers=[]):
+        super().__init__(self.handlers + handlers)

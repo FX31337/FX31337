@@ -1,6 +1,6 @@
 from src.handlers.web.WebHandler import WebHandler
 
-class PlatformHandler(WebHandler.handler):
+class PlatformHandler(WebHandler.request):
 
     def get(self):
         data = {}

@@ -1,6 +1,6 @@
 from src.handlers.web.WebHandler import WebHandler
 
-class StatusHandler(WebHandler.handler):
+class StatusHandler(WebHandler.request):
 
     def get(self):
         data = self.status()
