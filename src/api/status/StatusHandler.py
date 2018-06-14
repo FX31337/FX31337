@@ -1,13 +1,13 @@
 from src.handlers.web.WebHandler import WebHandler
 
-class SymbolHandler(WebHandler.handler):
+class StatusHandler(WebHandler.handler):
 
     def get(self):
-        data = {}
+        data = self.status()
         self.write(data)
 
     def post(self):
-        data = {}
+        data = self.status()
         self.write(data)
 
     def put(self):
@@ -17,3 +17,6 @@ class SymbolHandler(WebHandler.handler):
     def delete(self):
         data = {}
         self.write(data)
+
+    def status(self):
+        return {'status': 'active'}

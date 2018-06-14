@@ -1,6 +1,6 @@
 from src.handlers.web.WebHandler import WebHandler
 
-class SymbolHandler(WebHandler.handler):
+class TradeHandler(WebHandler.handler):
 
     def get(self):
         data = {}

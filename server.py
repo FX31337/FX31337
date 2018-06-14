@@ -1,38 +1,41 @@
+#!/usr/bin/env python3
+
+# Import handlers.
+from src.handlers.web.WebHandler import WebHandler
+from src.api.account.AccountHandler import AccountHandler
+from src.api.market.MarketHandler import MarketHandler
+from src.api.node.NodeHandler import NodeHandler
+from src.api.platform.PlatformHandler import PlatformHandler
+from src.api.profile.ProfileHandler import ProfileHandler
+from src.api.provider.ProviderHandler import ProviderHandler
+from src.api.status.StatusHandler import StatusHandler
+from src.api.symbol.SymbolHandler import SymbolHandler
+from src.api.trade.TradeHandler import TradeHandler
+
 from tornado import httpserver
 from tornado import gen
 from tornado.ioloop import IOLoop
 import tornado.web
-from src.storage.SQL import SQLiteStorage
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write('Hello, world')
+class Application(WebHandler.app):
+    handlers = [
+        (r"/?", StatusHandler),
+        (r"/api/account/?", AccountHandler),
+        (r"/api/market/?", MarketHandler),
+        (r"/api/node/?", NodeHandler),
+        (r"/api/platform/?", PlatformHandler),
+        (r"/api/profile/?", ProfileHandler),
+        (r"/api/provider/?", ProviderHandler),
+        (r"/api/status/?", StatusHandler),
+        (r"/api/symbol/?", SymbolHandler),
+        (r"/api/trade/?", TradeHandler),
+    ]
 
-class DataHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write('GET - Welcome to the DataHandler!')
-
-    def post(self):
-        self.write('POST - Welcome to the DataHandler!')
-
-class Application(tornado.web.Application):
-    def __init__(self):
-        handlers = [
-            (r"/?", MainHandler),
-            (r"/api/v1/data/?", DataHandler),
-            (r"/api/v1/data/[0-9][0-9][0-9][0-9]/?", DataHandler)
-        ]
-        tornado.web.Application.__init__(self, handlers)
+    def __init__(self, handlers=None):
+        super().__init__(handlers or self.handlers)
 
 def main():
-    #db = SQLiteStorage.SQLLiteStorage()
-
-    # Verify the database exists and has the correct layout
-    #db.verifyDatabase()
-
-    app = Application()
-    app.listen(9999)
-    IOLoop.instance().start()
+    Application().listen(9999).start()
 
 if __name__ == '__main__':
     main()
