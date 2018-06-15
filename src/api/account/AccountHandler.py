@@ -36,7 +36,7 @@ class AccountHandler(WebHandler.request):
             self.set_status(404)
             result = {
                 'error': {
-                    'type': 'NotFound',
+                    'type': e.__class__.__name__,
                     'message': 'Cannot find: ' + str(e),
                 }
             }
@@ -52,7 +52,7 @@ class AccountHandler(WebHandler.request):
 
     def post(self, id=None):
         """
-        " Creates the new account.
+        " Adds a new account.
         """
         try:
             body = self.json_decode(self.request.body)

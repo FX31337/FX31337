@@ -1,13 +1,14 @@
+""" Import modules. """
+from src.api.provider.Provider import Provider
 from binance.client import Client
 from binance.exceptions import BinanceAPIException, BinanceWithdrawException
 from binance.websockets import BinanceSocketManager
 
-# @file
-# Implements Binance Exchange API.
-# @see:
-# - https://github.com/sammchardy/python-binance
-
-class BinanceService():
+"""
+" Implements Binance Exchange API service.
+" @see: https://github.com/sammchardy/python-binance
+"""
+class BinanceProvider(Provider):
 
     order_type_buy = Client.SIDE_BUY
     order_type_sell = Client.SIDE_SELL
@@ -32,20 +33,21 @@ class BinanceService():
         'MN1': Client.KLINE_INTERVAL_1MONTH,
     }
 
-    def __init__(self):
+    def __init__(self, data):
         api_key = 'CHANGE_ME'
         api_secret = 'CHANGE_ME'
-        client = Client(api_key, api_secret)
+        #client = Client(api_key, api_secret)
+        print(api_key, api_secret)
 
     def getMarketDepth(self, symbol):
         return client.get_order_book(symbol)
 
     # Place a test market buy order.
-    def createOrderTest(self, symbol, side, type, quantity)
+    def createOrderTest(self, symbol, side, type, quantity):
         return client.create_test_order(symbol, side, type, quantity)
 
     # Place an actual order.
-    def createOrder(self, symbol, side, type, quantity)
+    def createOrder(self, symbol, side, type, quantity):
         return client.create_order(symbol, side, type, quantity)
 
     # Place a withdrawal.
