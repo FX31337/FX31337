@@ -1,6 +1,7 @@
 import tornado.web
 from tornado import gen, httpserver
 from tornado.escape import json_encode, json_decode
+from tornado.log import gen_log as logger
 
 """
 " Defines Tornado's web handler.
@@ -55,3 +56,8 @@ class TornadoHandler(tornado.web.RequestHandler):
             }
         }
         self.write(result)
+
+    def log(self, type, *args):
+        {
+            'info': logger.info
+        }.get(type)(*args)

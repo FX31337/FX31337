@@ -12,3 +12,6 @@ class WebHandler(TornadoApp):
 
     def __init__(self, handlers=[]):
         super().__init__(self.handlers + handlers)
+
+    def log(self, severity, *args):
+        super().log(severity, args)

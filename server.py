@@ -45,7 +45,9 @@ def main():
     """
     " Defines the main function.
     """
-    Application().listen(9999).start()
+    app = Application()
+    app.log("info", "Starting...")
+    app.listen(9999).start()
 
 """
 " Defines the main entry point of the program.
