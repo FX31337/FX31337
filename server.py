@@ -8,6 +8,7 @@ from src.api.node.NodeHandler import NodeHandler
 from src.api.platform.PlatformHandler import PlatformHandler
 from src.api.profile.ProfileHandler import ProfileHandler
 from src.api.provider.ProviderHandler import ProviderHandler
+from src.api.provider.ProviderListHandler import ProviderListHandler
 from src.api.status.StatusHandler import StatusHandler
 from src.api.strategy.StrategyHandler import StrategyHandler
 from src.api.symbol.SymbolHandler import SymbolHandler
@@ -31,6 +32,7 @@ class Application(WebHandler):
         (r"/api/profile/([0-9a-z]+)/?", ProfileHandler),
         (r"/api/provider/?", ProviderHandler),
         (r"/api/provider/([0-9a-z]+)/?", ProviderHandler),
+        (r"/api/provider/list/(type)/?", ProviderListHandler),
         (r"/api/status/?", StatusHandler),
         (r"/api/status/ping/?", StatusHandler),
         (r"/api/symbol/?", SymbolHandler),
