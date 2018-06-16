@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+""" Import modules. """
+from os.path import exists
 """ Import handlers. """
 from src.handlers.web.WebHandler import WebHandler
 from src.api.account.AccountHandler import AccountHandler
@@ -13,6 +15,7 @@ from src.api.status.StatusHandler import StatusHandler
 from src.api.strategy.StrategyHandler import StrategyHandler
 from src.api.symbol.SymbolHandler import SymbolHandler
 from src.api.trade.TradeHandler import TradeHandler
+from src.formats.YAML.YAMLFormat import YAMLFormat
 
 """
 " Defines the main web application class.
@@ -40,6 +43,12 @@ class Application(WebHandler):
         (r"/api/trade/?", TradeHandler),
         (r"/api/trade/([0-9]+)/?", TradeHandler),
     ]
+
+    def __init__(self, config_file='config.yaml', args=[]):
+        if exists(config_file):
+            config = YAMLFormat(config_file)
+            config.data
+        super().__init__(*args)
 
 def main():
     """
