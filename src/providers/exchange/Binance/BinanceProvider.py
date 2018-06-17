@@ -8,7 +8,12 @@ from binance.websockets import BinanceSocketManager
 " Implements Binance Exchange API service.
 " @see: https://github.com/sammchardy/python-binance
 """
-class BinanceProvider(Provider):
+class BinanceProvider(Client, Provider):
+    # API Key and Secret.
+    api_key, api_secret = None, None
+
+    # Get current account information.
+    account = {}
 
     order_type_buy = Client.SIDE_BUY
     order_type_sell = Client.SIDE_SELL
@@ -34,10 +39,23 @@ class BinanceProvider(Provider):
     }
 
     def __init__(self, data):
-        api_key = 'CHANGE_ME'
-        api_secret = 'CHANGE_ME'
-        #client = Client(api_key, api_secret)
-        print(api_key, api_secret)
+        """
+        " Initialize Binance's Client API.
+        """
+        try:
+            self.api_key = data["api_key"]
+            self.api_secret = data["api_secret"]
+        except Exception as e:
+            raise e
+        else:
+            super().__init__(self.api_key, self.api_secret)
+            self.update_account()
+
+    def update_account(self):
+        """
+        " Retrieves and updates the current account information.
+        """
+        self.account = self.get_account()
 
     def getMarketDepth(self, symbol):
         return client.get_order_book(symbol)
