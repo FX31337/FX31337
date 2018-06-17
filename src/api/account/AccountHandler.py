@@ -56,8 +56,9 @@ class AccountHandler(WebHandler.request):
         """
         try:
             body = self.json_decode(self.request.body)
-            key = id or len(self.db)
-            self.db[key] = body
+            key = str(id or len(self.db))
+            # @fixme: if key is len(), make sure it doesn't exist yet.
+            self.db[key] = {**body, **{"id": key}}
         except Exception as e:
             self.set_status(500)
             result = {
@@ -67,7 +68,7 @@ class AccountHandler(WebHandler.request):
                 }
             }
         else:
-            result = {'success': True}
+            result = self.db[key]
         self.write(result)
 
     def put(self, id=None):
@@ -77,7 +78,7 @@ class AccountHandler(WebHandler.request):
         try:
             result = self.db[id]
             body = self.json_decode(self.request.body)
-            self.db[id] = body
+            self.db[id] = {**body, **{"id": id}}
         except KeyError as e:
             self.set_status(404)
             result = {
@@ -95,7 +96,7 @@ class AccountHandler(WebHandler.request):
                 }
             }
         else:
-            result = {'success': True}
+            result = self.db[id]
         self.write(result)
 
     def delete(self, id):
